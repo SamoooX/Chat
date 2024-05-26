@@ -61,29 +61,7 @@
       right: 0;
     }
 
-    #input {
-      border-radius: 9999px;
-      border: 1px solid #eee;
-      flex: 1;
-      margin: 4px;
-      padding: 0 8px;
-    }
 
-    #input:focus {
-      outline: 0;
-    }
-
-    #form>button {
-      background: #09f;
-      color: #fff;
-      border: 0;
-      margin: 4px;
-      border-radius: 4px;
-    }
-
-    #form>button:hover {
-      background: #0cf;
-    }
   </style>
   <script type="module">
     import { io } from 'https://cdn.socket.io/4.3.2/socket.io.esm.min.js'
@@ -144,11 +122,10 @@
   <section class="bg-gray-400" id="chat">
     <ul id="messages" class="space-y-4">
       <form class="" id="form">
-        <input type="text" name="message" id="input" placeholder="Type a message" autocomplete="off" />
-        <button class="bg-green-600 rounded-full pr-2 pl-2" type="submit"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-send"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 14l11 -11" /><path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5" /></svg></button>
+        <input class="focus:outline-none rounded-full flex-1 p-3 mr-1 border-solid" type="text" name="message" id="input" placeholder="Type a message" autocomplete="off" />
+        <button class="bg-gray-700 rounded-full pr-2 pl-2" type="submit"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-send"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 14l11 -11" /><path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5" /></svg></button>
       </form>
   </section>
-
 </body>
 
 </html>
