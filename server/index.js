@@ -64,7 +64,7 @@ io.on('connection', async (socket) => {
         }
     }
 });
-
+app.use(express.static('src/client'));
 app.get('/', (req, res) => {
     res.sendFile(process.cwd() + '/src/client/index.html');
 });
