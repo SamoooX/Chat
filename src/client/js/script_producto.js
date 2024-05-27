@@ -36,12 +36,12 @@ document.getElementById('add-product-form').addEventListener('submit', async (ev
     event.preventDefault();
     const nombre = document.getElementById('nombre').value;
     const descripcion = document.getElementById('descripcion').value;
-    const marcaID = parseInt(document.getElementById('marca').value);
-    const categoriaID = parseInt(document.getElementById('categoria').value);
+    const marca = parseInt(document.getElementById('marca').value);
+    const categoria = parseInt(document.getElementById('categoria').value);
     const precio = parseFloat(document.getElementById('precio').value);
-    const stockTotal = parseInt(document.getElementById('stock_total').value);
+    const stock_total = parseInt(document.getElementById('stock_total').value);
 
-    const product = { nombre, descripcion, marcaID, categoriaID, precio, stockTotal };
+    const product = { nombre, descripcion, marca, categoria, precio, stock_total };
 
     // Verificar los datos antes de enviarlos
     console.log('Datos del producto:', product);
