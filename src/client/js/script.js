@@ -43,6 +43,9 @@ document.getElementById('add-product-form').addEventListener('submit', async (ev
 
     const product = { nombre, descripcion, marca, categoria, precio, stock_total };
 
+    // Verificar los datos antes de enviarlos
+    console.log('Datos del producto:', product);
+
     try {
         const response = await fetch('https://43956d08-5a9f-4221-bbe5-a73230d59fc2-00-3en0whd6bspg9.spock.replit.dev/api/productos/add', {
             method: 'POST',
@@ -53,10 +56,13 @@ document.getElementById('add-product-form').addEventListener('submit', async (ev
         });
 
         if (!response.ok) {
+            const errorData = await response.json();
+            console.error('Error del servidor:', errorData);
             throw new Error('Network response was not ok');
         }
+
         const result = await response.json();
-        console.log(result);
+        console.log('Producto agregado:', result);
         fetchProducts();  // Refresh the product list
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
