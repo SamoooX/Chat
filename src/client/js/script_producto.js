@@ -15,10 +15,28 @@ async function fetchProducts() {
     }
 }
 
+async function convertCurrency(amount, from, to) {
+    const apiKey = 'c397d62cba0ad9f0f29d4e53';
+    const url = `https://v6.exchangerate-api.com/v6/${apiKey}/pair/${from}/${to}/${amount}`;
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        return data.conversion_result;
+    } catch (error) {
+        console.error('There was a problem with the currency conversion:', error);
+        return null;
+    }
+}
+
 function displayProducts(products) {
     const productList = document.getElementById('product-list');
     productList.innerHTML = '';
-    products.forEach(product => {
+    products.forEach(async (product) => {
+        const usdPrice = await convertCurrency(product.precio, 'CLP', 'USD');
         const productRow = document.createElement('tr');
         productRow.innerHTML = `
             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">${product.nombre}</td>
@@ -26,6 +44,7 @@ function displayProducts(products) {
             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">${product.marca}</td>
             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">${product.categoria}</td>
             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">${product.precio}</td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500" id="precio-usd-${product.id}">${usdPrice}</td>
             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">${product.stock_total}</td>
         `;
         productList.appendChild(productRow);
@@ -40,7 +59,6 @@ document.getElementById('add-product-form').addEventListener('submit', async (ev
     const categoria = parseInt(document.getElementById('categoria').value);
     const precio = parseFloat(document.getElementById('precio').value);
     const stock_total = parseInt(document.getElementById('stock_total').value);
-
     const product = { nombre, descripcion, marca, categoria, precio, stock_total };
 
     // Verificar los datos antes de enviarlos
@@ -63,7 +81,7 @@ document.getElementById('add-product-form').addEventListener('submit', async (ev
 
         const result = await response.json();
         console.log('Producto agregado:', result);
-        fetchProducts();  // Refresh the product list
+        fetchProducts(); // Refresh the product list
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
     }
