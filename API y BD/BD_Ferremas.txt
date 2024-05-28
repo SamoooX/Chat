@@ -1,0 +1,146 @@
+
+CREATE TABLE Marca (
+    MarcaID SERIAL PRIMARY KEY,
+    Nombre VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Categoria (
+    CategoriaID SERIAL PRIMARY KEY,
+    Nombre VARCHAR(50) NOT NULL
+);
+
+
+
+CREATE TABLE Sucursal (
+    SucursalID SERIAL PRIMARY KEY,
+    Nombre VARCHAR(100) NOT NULL,
+    Direccion VARCHAR(200) NOT NULL,
+    Ciudad VARCHAR(50) NOT NULL
+);
+
+
+CREATE TABLE Producto (
+    ProductoID SERIAL PRIMARY KEY,
+    Nombre VARCHAR(100) NOT NULL,
+    Descripcion VARCHAR(500),
+    MarcaID INT,
+    CategoriaID INT,
+    Precio INT NOT NULL,
+    StockTotal INT NOT NULL,
+    CONSTRAINT fk_marca FOREIGN KEY (MarcaID) REFERENCES Marca(MarcaID),
+    CONSTRAINT fk_categoria FOREIGN KEY (CategoriaID) REFERENCES Categoria(CategoriaID)
+);
+
+CREATE TABLE ProductoPromocion (
+    PromocionID SERIAL PRIMARY KEY,
+    ProductoID INT,
+    FechaInicio DATE NOT NULL,
+    FechaFin DATE NOT NULL,
+    CONSTRAINT fk_producto FOREIGN KEY (ProductoID) REFERENCES Producto(ProductoID)
+);
+
+CREATE TABLE ProductoLanzamiento (
+    LanzamientoID SERIAL PRIMARY KEY,
+    ProductoID INT,
+    FechaLanzamiento DATE NOT NULL,
+    CONSTRAINT fk_producto_lanzamiento FOREIGN KEY (ProductoID) REFERENCES Producto(ProductoID)
+);
+
+CREATE TABLE HistorialPrecio (
+    HistorialPreciosID SERIAL PRIMARY KEY,
+    ProductoID INT,
+    Precio INT NOT NULL,
+    FechaModificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (ProductoID) REFERENCES Producto(ProductoID)
+);
+
+CREATE TABLE Sucursal (
+    SucursalID SERIAL PRIMARY KEY,
+    Nombre VARCHAR(100) NOT NULL,
+    Direccion VARCHAR(200) NOT NULL,
+    Ciudad VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE StockSucursal (
+    StockSucursalID SERIAL PRIMARY KEY,
+    ProductoID INT,
+    SucursalID INT,
+    Cantidad INT NOT NULL,
+    CONSTRAINT fk_producto_stock FOREIGN KEY (ProductoID) REFERENCES Producto(ProductoID),
+    CONSTRAINT fk_sucursal_stock FOREIGN KEY (SucursalID) REFERENCES Sucursal(SucursalID)
+);
+
+CREATE TABLE Usuario (
+    UsuarioID SERIAL PRIMARY KEY,
+    Nombre VARCHAR(100) NOT NULL,
+    Correo VARCHAR(100) NOT NULL UNIQUE,
+    Contrasena VARCHAR(100) NOT NULL,
+    Rol VARCHAR(20) NOT NULL
+);
+
+
+-- TRIGGER PARA ACTUALIZAR LOS DATOS EN LA TABLA HISTORIAL PRECIOS DESPUES DE CAMBIAR PRECIOS EN PRODUCTOS
+DROP TRIGGER IF EXISTS trg_actualizar_historial_precio ON Producto;
+
+-- Crear nuevo trigger para actualizar el historial de precios
+CREATE OR REPLACE FUNCTION actualizar_historial_precio()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Insertar un nuevo registro en el historial de precios
+    INSERT INTO HistorialPrecio (ProductoID, Precio, FechaModificacion)
+    VALUES (NEW.ProductoID, NEW.Precio, CURRENT_TIMESTAMP);
+    
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Asignar el nuevo trigger a la tabla Producto
+CREATE TRIGGER trg_actualizar_historial_precio
+AFTER INSERT OR UPDATE ON Producto
+FOR EACH ROW
+EXECUTE FUNCTION actualizar_historial_precio();
+
+-- Insertar categorías
+INSERT INTO Categoria (CategoriaID, Nombre) VALUES
+(1, 'Herramientas Manuales'),
+(2, 'Materiales Básicos'),
+(3, 'Equipos de Seguridad'),
+(4, 'Tornillos y Anclajes'),
+(5, 'Fijaciones y Adhesivos'),
+(6, 'Equipos de Medición');
+
+-- Herramientas Manuales
+INSERT INTO Producto (ProductoID, Nombre, Descripcion, MarcaID, CategoriaID, Precio, StockTotal) VALUES
+(1, 'Martillos', '', 1, 1, 1599, 10),
+(2, 'Destornilladores', '', 1, 1, 999, 20),
+(3, 'Llaves', '', 1, 1, 1250, 15),
+(4, 'Herramientas Eléctricas', '', 1, 1, 7999, 5),
+(5, 'Taladros', '', 1, 1, 12999, 3),
+(6, 'Sierras', '', 1, 1, 8999, 8),
+(7, 'Lijadoras', '', 1, 1, 4999, 12),
+(8, 'Materiales de Construcción', '', 1, 1, 2499, 20);
+
+-- Materiales Básicos
+INSERT INTO Producto (ProductoID, Nombre, Descripcion, MarcaID, CategoriaID, Precio, StockTotal) VALUES
+(9, 'Cemento', '', 2, 2, 1999, 30),
+(10, 'Arena', '', 2, 2, 999, 50),
+(11, 'Ladrillos', '', 2, 2, 79, 100),
+(12, 'Acabados', '', 2, 2, 3999, 20),
+(13, 'Pinturas', '', 2, 2, 1499, 25),
+(14, 'Barnices', '', 2, 2, 1999, 20),
+(15, 'Cerámicos', '', 2, 2, 2999, 15);
+
+-- Equipos de Seguridad
+INSERT INTO Producto (ProductoID, Nombre, Descripcion, MarcaID, CategoriaID, Precio, StockTotal) VALUES
+(16, 'Cascos', '', 3, 3, 2999, 40),
+(17, 'Guantes', '', 3, 3, 999, 100),
+(18, 'Lentes de Seguridad', '', 3, 3, 1499, 80),
+(19, 'Accesorios Varios', '', 3, 3, 499, 200);
+
+-- Insertar marcas
+INSERT INTO Marca (MarcaID, Nombre) VALUES
+(1, 'Bosch'),
+(2, 'Black & Decker'),
+(3, 'DeWalt'),
+(4, 'Makita'),
+(5, 'Stanley');
