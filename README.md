@@ -46,43 +46,35 @@ Este comando iniciará la aplicación en modo de desarrollo. Por defecto, la apl
 
 
 
-# API de Gestión de Productos
+# API Ferremas
 
-Esta API proporciona funcionalidades para la gestión de productos, incluyendo la consulta, adición, actualización y eliminación de productos, así como la gestión de promociones y el seguimiento del historial de precios.
+Esta API proporciona funcionalidades para administrar productos de la tienda Ferremas.
 
-## Enlaces útiles
+### Tecnologías Utilizadas
+- **Flask**: Framework de desarrollo web en Python utilizado para crear la API.
+- **PostgreSQL**: Sistema de gestión de bases de datos relacional utilizado para almacenar datos de la aplicación.
+- **ElephantSQL**: Servicio de base de datos en la nube PostgreSQL utilizado para alojar la base de datos de la aplicación.
 
-- **Base URL**: [API de Gestión de Productos](https://43956d08-5a9f-4221-bbe5-a73230d59fc2-00-3en0whd6bspg9.spock.replit.dev/)
+### Base de datos
+-La base de datos que se utilizada se encuentra en la carpeta API y BD y tiene por nombre "BD_ferremas.txt"
 
-## Endpoints Disponibles
+### Uso de la API
+Para utilizar la API Ferremas, sigue estos pasos:
 
-### Productos
+1. Descarga y descomprime el archivo `Ferremas.zip` que contiene el código fuente de la API.
+2. Abre el proyecto en Replit y asegúrate de tener todas las dependencias instaladas.
+3. Ejecuta la aplicación Flask y accede a los diferentes endpoints para realizar las operaciones deseadas.
 
-- `GET /productos`: Obtiene todos los productos.
-- `POST /productos/add`: Agrega un nuevo producto.
-- `PATCH /productos/update`: Actualiza un producto existente.
-- `DELETE /productos/delete/<id_producto>`: Elimina un producto por su ID.
-- `GET /productos/categoria/<categoria>`: Obtiene productos por categoría.
+### Endpoints Disponibles
+- **GET /api/productos**: Obtener todos los productos.
+- **POST /api/productos/add**: Agregar un nuevo producto.
+- **PATCH /api/productos/update**: Actualizar un producto existente.
+- **DELETE /api/productos/delete/<id_producto>**: Eliminar un producto por su ID.
+- **GET /api/productos/categoria/<categoria>**: Obtener productos por categoría.
+- **GET /api/productos/historial_precios/<id_producto>**: Obtener historial de precios de un producto.
+- **GET /api/productos/disponibilidad_sucursales/<id_producto>**: Verificar disponibilidad en sucursales.
+- **GET /api/productos/promocion**: Obtener productos en promoción.
+- **GET /api/productos/lanzamientos**: Obtener lanzamientos recientes.
 
-### Historial de Precios
-
-- `GET /historial_precios/<id_producto>`: Obtiene el historial de precios de un producto por su ID.
-
-### Promociones de Productos
-
-- `POST /promocion/agregar`: Agrega una nueva promoción de producto.
-- `PATCH /promocion/actualizar`: Actualiza una promoción de producto existente.
-- `DELETE /promocion/eliminar/<promocion_id>`: Elimina una promoción de producto por su ID.
-
-### Otros Endpoints
-
-- `GET /promocion`: Obtiene productos en promoción.
-- `GET /lanzamientos`: Obtiene lanzamientos recientes.
-- `GET /disponibilidad_sucursales/<id_producto>`: Verifica la disponibilidad en sucursales de un producto.
-
-## Ejemplos de Uso
-
-### Obtener todos los productos
-
-```bash
-GET https://43956d08-5a9f-4221-bbe5-a73230d59fc2-00-3en0whd6bspg9.spock.replit.dev/productos
+### Ejemplo de Uso
+Para obtener todos los productos, realiza una solicitud GET a la URL: `https://43956d08-5a9f-4221-bbe5-a73230d59fc2-00-3en0whd6bspg9.spock.replit.dev/api/productos`
