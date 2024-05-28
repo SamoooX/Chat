@@ -8,7 +8,7 @@ Ferramas es una aplicación desarrollada para facilitar la gestión y organizaci
 
 Para poder ejecutar y desarrollar el proyecto Ferramas, asegúrate de tener instalado lo siguiente:
 
-- Node.js (versión 14 o superior)
+- Node.js (versión 20)
 - npm (Node Package Manager)
 
 ## Instalación
