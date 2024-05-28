@@ -77,4 +77,4 @@ Para utilizar la API Ferremas, sigue estos pasos:
 - **GET /api/productos/lanzamientos**: Obtener lanzamientos recientes.
 
 ### Ejemplo de Uso
-Para obtener todos los productos, realiza una solicitud GET a la URL: `https://43956d08-5a9f-4221-bbe5-a73230d59fc2-00-3en0whd6bspg9.spock.replit.dev/api/productos`
+Para obtener todos los productos, realiza una solicitud GET a la URL: `https://43956d08-5a9f-4221-bbe5-a73230d59fc2-00-3en0whd6bspg9.spock.replit.dev/`
