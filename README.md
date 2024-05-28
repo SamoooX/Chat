@@ -1,4 +1,3 @@
-```markdown
 # Ferramas
 
 ## Descripción del Proyecto
@@ -16,12 +15,11 @@ Para poder ejecutar y desarrollar el proyecto Ferramas, asegúrate de tener inst
 
 1. **Clonar el repositorio**:
    ```bash
-   git clone https://github.com/tu-usuario/ferramas.git
-   ```
+   git clone https://github.com/SamoooX/Chat.git
 
 2. **Navegar al directorio del proyecto**:
    ```bash
-   cd ferramas
+   cd Chat
    ```
 
 3. **Instalar las dependencias**:
