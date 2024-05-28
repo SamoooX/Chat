@@ -25,7 +25,7 @@ async function convertCurrency(amount, from, to) {
             throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        return data.conversion_result;
+        return data.conversion_result.toFixed(2); // Limitar a dos decimales
     } catch (error) {
         console.error('There was a problem with the currency conversion:', error);
         return null;
@@ -37,18 +37,23 @@ function displayProducts(products) {
     productList.innerHTML = '';
     products.forEach(async (product) => {
         const usdPrice = await convertCurrency(product.precio, 'CLP', 'USD');
+        const nacionalPrice = formatPriceWithThousandSeparator(product.precio);
         const productRow = document.createElement('tr');
         productRow.innerHTML = `
             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">${product.nombre}</td>
             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">${product.descripcion}</td>
             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">${product.marca}</td>
             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">${product.categoria}</td>
-            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">${product.precio}</td>
-            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500" id="precio-usd-${product.id}">${usdPrice}</td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">$${nacionalPrice} CLP</td>
+            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500" id="precio-usd-${product.id}">$${usdPrice} USD</td>
             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">${product.stock_total}</td>
         `;
         productList.appendChild(productRow);
     });
+}
+
+function formatPriceWithThousandSeparator(price) {
+    return Math.floor(price).toLocaleString('es-CL');
 }
 
 document.getElementById('add-product-form').addEventListener('submit', async (event) => {
