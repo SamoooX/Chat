@@ -9,8 +9,6 @@ CREATE TABLE Categoria (
     Nombre VARCHAR(50) NOT NULL
 );
 
-
-
 CREATE TABLE Sucursal (
     SucursalID SERIAL PRIMARY KEY,
     Nombre VARCHAR(100) NOT NULL,
@@ -52,13 +50,6 @@ CREATE TABLE HistorialPrecio (
     Precio INT NOT NULL,
     FechaModificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (ProductoID) REFERENCES Producto(ProductoID)
-);
-
-CREATE TABLE Sucursal (
-    SucursalID SERIAL PRIMARY KEY,
-    Nombre VARCHAR(100) NOT NULL,
-    Direccion VARCHAR(200) NOT NULL,
-    Ciudad VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE StockSucursal (
