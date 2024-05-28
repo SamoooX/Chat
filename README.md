@@ -85,4 +85,4 @@ Esta API proporciona funcionalidades para la gestión de productos, incluyendo l
 ### Obtener todos los productos
 
 ```bash
-curl -X GET https://43956d08-5a9f-4221-bbe5-a73230d59fc2-00-3en0whd6bspg9.spock.replit.dev/productos
+GET https://43956d08-5a9f-4221-bbe5-a73230d59fc2-00-3en0whd6bspg9.spock.replit.dev/productos
