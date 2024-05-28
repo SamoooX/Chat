@@ -74,7 +74,6 @@ Para utilizar la API Ferremas, sigue estos pasos:
 - **GET /api/productos/historial_precios/<id_producto>**: Obtener historial de precios de un producto.
 - **GET /api/productos/disponibilidad_sucursales/<id_producto>**: Verificar disponibilidad en sucursales.
 - **GET /api/productos/promocion**: Obtener productos en promoción.
-- **GET /api/productos/lanzamientos**: Obtener lanzamientos recientes.
 
 ### Ejemplo de Uso
 Para obtener todos los productos, realiza una solicitud GET a la URL: `https://43956d08-5a9f-4221-bbe5-a73230d59fc2-00-3en0whd6bspg9.spock.replit.dev/`
