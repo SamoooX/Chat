@@ -69,11 +69,11 @@ Para utilizar la API Ferremas, sigue estos pasos:
 - **GET /api/productos**: Obtener todos los productos.
 - **POST /api/productos/add**: Agregar un nuevo producto.
 - **PATCH /api/productos/update**: Actualizar un producto existente.
-- **DELETE /api/productos/promocion/eliminar/<id_promocion>**: Eliminar una promocion por su ID.
 - **GET /api/productos/categoria/<id_categoria>**: Obtener productos por categoría.
 - **GET /api/productos/historial_precios/<id_producto>**: Obtener historial de precios de un producto.
 - **GET /api/productos/disponibilidad_sucursales/<id_producto>**: Verificar disponibilidad en sucursales.
 - **GET /api/productos/promocion**: Obtener productos en promoción.
+- **DELETE /api/productos/promocion/eliminar/<id_promocion>**: Eliminar una promocion por su ID.
 
 ### Ejemplo de Uso
 Para obtener todos los productos, realiza una solicitud GET a la URL: `https://43956d08-5a9f-4221-bbe5-a73230d59fc2-00-3en0whd6bspg9.spock.replit.dev/`
